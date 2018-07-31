@@ -5,6 +5,48 @@
       {
         "name": "self",
         "type": "DLL.Data storage"
+      }
+    ],
+    "name": "isEmpty",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "self",
+        "type": "DLL.Data storage"
+      },
+      {
+        "name": "_curr",
+        "type": "uint256"
+      }
+    ],
+    "name": "contains",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "self",
+        "type": "DLL.Data storage"
       },
       {
         "name": "_curr",
@@ -51,39 +93,17 @@
       {
         "name": "self",
         "type": "DLL.Data storage"
-      },
-      {
-        "name": "_curr",
-        "type": "uint256"
       }
     ],
-    "name": "contains",
+    "name": "getStart",
     "outputs": [
       {
         "name": "",
-        "type": "bool"
+        "type": "uint256"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "self",
-        "type": "DLL.Data storage"
-      },
-      {
-        "name": "_curr",
-        "type": "uint256"
-      }
-    ],
-    "name": "remove",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -132,41 +152,21 @@
     "type": "function"
   },
   {
-    "constant": true,
+    "constant": false,
     "inputs": [
       {
         "name": "self",
         "type": "DLL.Data storage"
-      }
-    ],
-    "name": "isEmpty",
-    "outputs": [
+      },
       {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "self",
-        "type": "DLL.Data storage"
-      }
-    ],
-    "name": "getStart",
-    "outputs": [
-      {
-        "name": "",
+        "name": "_curr",
         "type": "uint256"
       }
     ],
+    "name": "remove",
+    "outputs": [],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

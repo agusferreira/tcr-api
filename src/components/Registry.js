@@ -58,7 +58,7 @@ class Registry extends Component {
     } catch (err) {
       console.log(err);
     }
-    return 'no name available';
+    return 'Unknown';
   }
 }
 

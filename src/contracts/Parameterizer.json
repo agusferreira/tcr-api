@@ -14,20 +14,6 @@
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_propID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "processProposal",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [
       {
@@ -74,119 +60,6 @@
     "constant": true,
     "inputs": [
       {
-        "name": "_propID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "propExists",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_challengeID",
-        "type": "uint256"
-      }
-    ],
-    "name": "challengeWinnerReward",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_name",
-        "type": "string"
-      }
-    ],
-    "name": "get",
-    "outputs": [
-      {
-        "name": "value",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_propID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "challengeCanBeResolved",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_propID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "challengeReparameterization",
-    "outputs": [
-      {
-        "name": "challengeID",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_challengeID",
-        "type": "uint256"
-      },
-      {
-        "name": "_salt",
-        "type": "uint256"
-      }
-    ],
-    "name": "claimReward",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
         "name": "",
         "type": "uint256"
       }
@@ -212,75 +85,6 @@
       {
         "name": "winningTokens",
         "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_voter",
-        "type": "address"
-      },
-      {
-        "name": "_challengeID",
-        "type": "uint256"
-      },
-      {
-        "name": "_salt",
-        "type": "uint256"
-      }
-    ],
-    "name": "voterReward",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_name",
-        "type": "string"
-      },
-      {
-        "name": "_value",
-        "type": "uint256"
-      }
-    ],
-    "name": "proposeReparameterization",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_propID",
-        "type": "bytes32"
-      }
-    ],
-    "name": "canBeSet",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
       }
     ],
     "payable": false,
@@ -402,11 +206,6 @@
     "inputs": [
       {
         "indexed": false,
-        "name": "proposer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
         "name": "name",
         "type": "string"
       },
@@ -419,6 +218,21 @@
         "indexed": false,
         "name": "propID",
         "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "deposit",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "appEndDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "proposer",
+        "type": "address"
       }
     ],
     "name": "_ReparameterizationProposal",
@@ -428,22 +242,379 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "name": "challenger",
-        "type": "address"
-      },
-      {
-        "indexed": false,
+        "indexed": true,
         "name": "propID",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "pollID",
+        "name": "challengeID",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "commitEndDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "revealEndDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "challenger",
+        "type": "address"
       }
     ],
     "name": "_NewChallenge",
     "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "propID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "_ProposalAccepted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "propID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "_ProposalExpired",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "propID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "challengeID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "rewardPool",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "totalTokens",
+        "type": "uint256"
+      }
+    ],
+    "name": "_ChallengeSucceeded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "propID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "challengeID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "rewardPool",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "totalTokens",
+        "type": "uint256"
+      }
+    ],
+    "name": "_ChallengeFailed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "challengeID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "reward",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "voter",
+        "type": "address"
+      }
+    ],
+    "name": "_RewardClaimed",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "proposeReparameterization",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_propID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "challengeReparameterization",
+    "outputs": [
+      {
+        "name": "challengeID",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_propID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "processProposal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_challengeID",
+        "type": "uint256"
+      },
+      {
+        "name": "_salt",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimReward",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_challengeIDs",
+        "type": "uint256[]"
+      },
+      {
+        "name": "_salts",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "claimRewards",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_voter",
+        "type": "address"
+      },
+      {
+        "name": "_challengeID",
+        "type": "uint256"
+      },
+      {
+        "name": "_salt",
+        "type": "uint256"
+      }
+    ],
+    "name": "voterReward",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_propID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "canBeSet",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_propID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "propExists",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_propID",
+        "type": "bytes32"
+      }
+    ],
+    "name": "challengeCanBeResolved",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_challengeID",
+        "type": "uint256"
+      }
+    ],
+    "name": "challengeWinnerReward",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_name",
+        "type": "string"
+      }
+    ],
+    "name": "get",
+    "outputs": [
+      {
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_challengeID",
+        "type": "uint256"
+      },
+      {
+        "name": "_voter",
+        "type": "address"
+      }
+    ],
+    "name": "tokenClaims",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

@@ -5,7 +5,7 @@ const assert = require('assert');
 const secrets = require('../src/secrets.json');
 
 let registryAddress = secrets.registry;
-let provider = new Web3('http://localhost:7545');
+let provider = new Web3('http://localhost:8545');
 
 let registry, account, accountExtra, parameterizer, accounts;
 
@@ -20,6 +20,7 @@ describe('TCR', () => {
     // Settings the default address in case it's empty
     accounts = await provider.eth.getAccounts();
     provider.eth.defaultAccount = accounts[0];
+    console.log(accounts[0]);
 
     // Settings the default entities
     registry = new Registry(registryAddress, provider);
@@ -35,7 +36,7 @@ describe('TCR', () => {
     });
 
     it('can pre-approve tokens', async () => {
-      let amount = '20';
+      let amount = '100';
 
       await account.approveTokens(registry.address, amount);
 
@@ -84,7 +85,7 @@ describe('TCR', () => {
       let deposit = await listing.getDeposit();
 
       await listing.deposit(depositAmount);
-      assert.strictEqual(await listing.getDeposit(), deposit + depositAmount);
+      assert.strictEqual(parseInt(await listing.getDeposit(),10), stake + depositAmount);
 
       await listing.withdraw(depositAmount);
       assert.strictEqual(await listing.getDeposit(), deposit);
@@ -136,13 +137,14 @@ describe('TCR', () => {
 
     it('should be able to request/withdraw voting rights', async () => {
       let initialTokenBalance = await plcr.getTokenBalance(account.owner);
+      console.log(initialTokenBalance); // 275022
       let amount = 5000;
 
       await plcr.requestVotingRights(amount);
-      assert.strictEqual(initialTokenBalance + amount, await plcr.getTokenBalance(account.owner));
+      assert.strictEqual(parseInt(initialTokenBalance,10) + amount, await parseInt(plcr.getTokenBalance(account.owner),10));
 
       await plcr.withdrawVotingRights(amount);
-      assert.strictEqual(initialTokenBalance, await plcr.getTokenBalance(account.owner));
+      assert.strictEqual(parseInt(initialTokenBalance,10), await parseInt(plcr.getTokenBalance(account.owner),10));
     });
 
     it('should be able to commit a vote', async () => {
