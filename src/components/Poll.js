@@ -10,7 +10,7 @@ class Poll extends Component {
   }
 
   async commitVote(secretHash, stake, _sendObj = {}) {
-    let prevPollID = await this.getPointForInsert(this.getSender(_sendObj), stake);
+    let prevPollID = await this.getPointForInsert(this.getSender(_sendObj), stake, this.id);
 
     return this.send(this.contract.methods.commitVote, this.id, secretHash, stake, prevPollID, _sendObj);
   }
@@ -107,8 +107,8 @@ class Poll extends Component {
     };
   }
 
-  async getPointForInsert(voter, tokensAmount) {
-    return parseInt(await this.contract.methods.getInsertPointForNumTokens(voter, tokensAmount).call(), 10);
+  async getPointForInsert(voter, tokensAmount, pollId) {
+    return parseInt(await this.contract.methods.getInsertPointForNumTokens(voter, tokensAmount, pollId).call(), 10);
   }
 
   _getData() {
